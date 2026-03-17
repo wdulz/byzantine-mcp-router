@@ -1,6 +1,6 @@
 # The Byzantine MCP Router & Distributed Trust Protocol
 
-**100% AI safety is mathematically uncomputable. This repository provides the architectural answer.**
+**Guaranteeing 100% AI safety is computationally undecidable. This repository provides the architectural answer.**
 
 With the rise of the Model Context Protocol (MCP) and autonomous multi-agent systems, new threat vectors like "BYOMCP" worms and OpenClaw-style attacks are emerging. Classical 1:1 topologies and asymmetrical safety wrappers fail against these threats—as mathematically proven by Rice's Theorem, Kolmogorov Complexity, and recent cryptographic proofs.
 
