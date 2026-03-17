@@ -13,6 +13,6 @@ This paper introduces the **Byzantine MCP Router (BMR)**:
 📄 **[Read the full paper here (main.V6.pdf)](main.V6.pdf)**
 
 ## Repository Contents
-* `main.V6.pdf`: The final compiled paper.
-* `main.V6.tex` & `references.V6.bib`: Full LaTeX source code.
+* `main.V7.pdf`: The final compiled paper.
+* `main.V7.tex` & `references.V7.bib`: Full LaTeX source code.
 * `img/`: Graphviz (`.dot`) source files and compiled vector graphics for all architectural diagrams.

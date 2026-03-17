@@ -44,10 +44,10 @@
   <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>main.V6.bcf</file>
+      <file>main.V7.bcf</file>
     </provides>
     <requires type="dynamic">
-      <file>main.V6.bbl</file>
+      <file>main.V7.bbl</file>
     </requires>
     <requires type="static">
       <file>blx-dm.def</file>
@@ -67,22 +67,22 @@
     <generic>biber</generic>
     <cmdline>
       <binary>biber</binary>
-      <infile>main.V6</infile>
+      <infile>main.V7</infile>
     </cmdline>
     <input>
-      <file>main.V6.bcf</file>
+      <file>main.V7.bcf</file>
     </input>
     <output>
-      <file>main.V6.bbl</file>
+      <file>main.V7.bbl</file>
     </output>
     <provides type="dynamic">
-      <file>main.V6.bbl</file>
+      <file>main.V7.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>main.V6.bcf</file>
+      <file>main.V7.bcf</file>
     </requires>
     <requires type="editable">
-      <file>references.V6.bib</file>
+      <file>references.V7.bib</file>
     </requires>
   </external>
 </requests>

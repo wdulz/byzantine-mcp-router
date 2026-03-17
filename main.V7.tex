@@ -19,7 +19,7 @@
 \usepackage{palatino}
 \usepackage[style=ieee, backend=biber]{biblatex}
 
-\addbibresource{references.V6.bib}
+\addbibresource{references.V7.bib}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
@@ -462,6 +462,20 @@ As detailed in the step-by-step flow of Figure \ref{fig:byomcp_firewall}, the By
     \item \textbf{Structural Block and Quarantine:} The BMR evaluates these requests. Because the system call attempt by $A_1$ is an extreme outlier in the Action-Space compared to the benign summaries of the other agents, it fails to meet the quorum ($|C| < Q$). The router acts as a semantic firewall, structurally blocking the execution. As depicted in the final node of Figure \ref{fig:byomcp_firewall}, the Router permanently severs $A_1$'s connection and isolates the anomalous payload into the Morpheus Quarantine for forensic review.
 \end{enumerate}
 
+\subsection{Case Study: Persistent Orchestration and the Gas Town Vulnerability}
+
+The theoretical vulnerabilities of hierarchical topologies (Section 2.2) and context-sensitive memory mutations (Section 4.3) are empirically observable in emerging open-source orchestration frameworks. A prominent example is \textit{Gas Town} \cite{yegge2026gastown}, a novel multi-agent orchestration system for Claude Code.
+
+Gas Town employs a central AI coordinator (the “Mayor“) that delegates tasks to ephemeral worker agents (“Polecats“). Its defining feature is persistent work tracking: the semantic context and progress of agents are continuously saved via Git-based hooks. While highly efficient for crash recovery, this architecture inadvertently creates a critical security flaw when exposed to Semantic Byzantine Faults or agentic worms, validating our theoretical models on two fronts:
+
+\textbf{1. The Hierarchical Trust Fallacy:} 
+Gas Town exemplifies the vulnerable Manager-Worker topology. The Mayor orchestrator intrinsically trusts the outputs of the Polecats. If a Polecat encounters a prompt injection during a sub-task, the Mayor lacks a lateral BFT consensus mechanism to verify the worker's integrity, seamlessly aggregating the poisoned data into the global state.
+
+\textbf{2. Weaponized Context Persistence:} 
+Furthermore, the persistence mechanism weaponizes the CCSM context mutation ($c_{t+1} = c_t \oplus x$). If a BYOMCP worm alters a worker's context, Gas Town persistently commits this poisoned state to the Git repository. Consequently, any subsequent agent spun up to resume the task will load the compromised history, resulting in instantaneous, persistent re-infection. 
+
+This demonstrates that without a protective, horizontal layer like the Byzantine MCP Router, persistent hierarchical frameworks act as permanent incubators for agentic worms.
+
 \section{Theoretical Limits: Computability and Undecidability in AI Safety}
 
 While the Byzantine MCP Router (BMR) provides a robust, mathematically sound architecture for probabilistic safety and fault isolation, it is crucial to acknowledge that 100\% deterministic safety in Artificial General Intelligence (AGI) is not an engineering challenge—it is a mathematical impossibility.
@@ -523,7 +537,7 @@ While the theoretical framework presented in this paper mathematically resolves 
 
 The BMR is currently a formal theoretical construct. Implementing a $1:R:N$ topology inherently introduces network latency, as the Router must wait for the $Q$-th slowest agent to converge. Furthermore, the semantic threshold $\theta$ requires empirical fine tuning. If $\theta$ is set too high, legitimate stochastic variance in generation causes false negatives (quorum failure). On the other hand, if $\theta$ is set too low, subtle Semantic Byzantine Faults (SBF) will slip through.
 
-Future work must deploy the BMR in a simulated benchmark environment (e.g., an agentic capture-the-flag scenario) to quantify the latency overhead and dynamically optimize the $\theta$ threshold.
+Future work will require deploying the BMR in a practical multi-agent workspace---such as integrating the router as a BFT proxy between the “Mayor“\ orchestrator and the “Polecat“\ worker agents in the open-source \textit{Gas Town} framework \cite{yegge2026gastown}---to empirically quantify the latency overhead and dynamically optimize the $\theta$ threshold against persistent state infections.
 
 Currently, the routing of outliers into the \textit{Morpheus Quarantine} is topologically defined by $|C| < Q$. However, the internal mechanism for distinguishing a brilliant “creative anomaly“\ from a destructive “semantic hallucination“\ remains an open algorithmic challenge.
 
@@ -542,6 +556,8 @@ This guarantees that human accountability remains a structurally load-bearing me
 However, as proven via Rice's Theorem, the Halting Problem, and Kolmogorov Complexity, the quest for perfectly aligned, mathematically secure AGI is an impossibility.
 
 We cannot simply “solve“\ AI safety with better training data or static rule-sets. Therefore, the implementation of mechanisms like the \textit{Trust Protocol} is not merely a technical optimization, but a philosophical and mathematical necessity.
+
+\pagebreak
 
 We must accept the uncomputability of perfect alignment, opting instead for architectural resilience. By balancing the sterile, majoritarian consensus of logical efficiency with the necessary dialectic preservation of the \textit{Morpheus Principle}, we can forge a symbiotic, fault-tolerant architecture robust enough to survive the theoretical limits of computation.
 
