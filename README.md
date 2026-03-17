@@ -10,7 +10,7 @@ This paper introduces the **Byzantine MCP Router (BMR)**:
 * ⚙️ **Extended Petri Nets (EPN):** Guarantees true human-in-the-loop execution via inhibitory arcs, preventing fake accountability.
 * 💊 **The Morpheus Principle:** Isolates creative anomalies without sacrificing them to pure majority consensus.
 
-📄 **[Read the full paper here (main.V6.pdf)](main.V6.pdf)**
+📄 **[Read the full paper here (main.V7.pdf)](main.V7.pdf)**
 
 ## Repository Contents
 * `main.V7.pdf`: The final compiled paper.
