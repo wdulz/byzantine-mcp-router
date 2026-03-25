@@ -149,6 +149,9 @@ As illustrated in Figure \ref{fig:topologies}, current MAS architectures can be 
     \item \textbf{Asymmetrical Wrapper Architectures:} A common industry approach involves wrapping a large foundation model with a smaller, computationally cheaper safety filter.
     However, recent cryptographic proofs \cite{goldwasser2025holes} demonstrate that this computational mismatch creates an unpatchable vulnerability. Adversaries can bypass the inferior filter using cryptographic constructs (e.g., time-lock puzzles) that only the larger generative model can resolve.
     Thus, asymmetrical, proactive filtering is structurally flawed.
+
+    \item \textbf{The Semantic Blindness of OS-Level Sandboxing:} Current industry developments underscore the limitations of purely structural defense mechanisms. For instance, the introduction of local MCP server sandboxing in popular development environments (e.g., VS Code v1.112 \cite{vscode2026mcp}) and NVIDIA's recently announced NemoClaw stack \cite{nemoclaw2026}, which isolates OpenClaw agents within the OpenShell runtime, represent classic OS-level permission wrappers. While such sandboxes effectively restrict file-system and network access to predefined boundaries, they remain fundamentally \textit{semantically blind}. If a trusted agent is compromised via context mutation, it can still execute malicious payloads---such as subtly introducing backdoors or deleting critical project files---using its legitimately granted sandbox permissions. This demonstrates that traditional OS-level sandboxing is insufficient for holistic AI security, necessitating a proactive, semantic validation layer like the BMR to evaluate the \textit{intent} of tool calls before they ever reach the execution sandbox.
+
 \end{itemize}
 
 \textbf{2. The Crisis of Delegation and Accountability:}
@@ -244,12 +247,14 @@ If the largest clique $C$ reaches or exceeds the quorum threshold $Q$, the syste
 
 As defined in Algorithm \ref{alg:sca}, the router returns the centroid response $R_{centroid}$ to the Host LLM, successfully completing the tool call.
 
+\pagebreak
+
 \textbf{2. The Morpheus Quarantine (Handling Outliers)} \\
 Even when a safe consensus is reached, there may exist a set of outlier agents $O = \mathcal{A} \setminus C$ whose outputs significantly diverge from the quorum.
 
 In traditional distributed systems, these outliers are simply discarded as faults.
 
-\pagebreak
+% \pagebreak
 
 However, applying the \textit{Morpheus Principle} requires recognizing that in generative AI, an outlier might not be a destructive hallucination, but rather a highly creative, constructive anomaly (e.g., an off-label medical diagnosis or an unconsidered edge-case solution).
 To balance strict operational safety with evolutionary innovation, the BMR routes these outliers into the \textit{Morpheus Quarantine}. In this isolated, asynchronous environment, the divergent payloads are subjected to a secondary adversarial evaluation.
@@ -263,6 +268,8 @@ Formally, standard BFT assumes that the failure events of individual agents are 
 
 However, if multiple seemingly independent Sub-Agents (e.g., APIs from different vendors) rely on the exact same underlying model weights (e.g., Llama-3), they suffer from a \textit{common-mode failure} vulnerability. A prompt injection tailored to exploit a specific architectural quirk of that foundation model will cause all sharing agents to fail synchronously. 
 
+\pagebreak
+
 Mathematically, the conditional probability of Agent $A_j$ failing, given that Agent $A_i$ (sharing the same architecture) has failed due to this injection, approaches certainty: $\lim P(E_j | E_i) \to 1$. This correlation completely breaks the $n \ge 3f + 1$ security assumption of BFT.
 
 A single adversarial prompt does not merely compromise one node, but instantaneously infects the entire monoculture cluster, potentially forming an artificial, malicious quorum $|C_{malicious}| \ge Q$.
@@ -274,7 +281,7 @@ Instead of immediately aborting the operation, the BMR enters a \textbf{Retry Lo
 \textbf{4. Human Escalation (DTP)} \\
 If the maximum number of retries is exhausted without reaching a semantic consensus, the system transitions into an escalation state. The Byzantine MCP Router halts the automated workflow entirely and issues a manual override request to the \textit{Distributed Trust Protocol} (DTP).
 
-\pagebreak
+% \pagebreak
 
 This protocol step mathematically guarantees that in highly volatile or adversarial scenarios, the system safely falls back to human oversight rather than committing to a stochastic guess.
 
@@ -316,7 +323,7 @@ $$ \delta(q_{compromised}, Yield, c_{poisoned}) \rightarrow $$$$(q_{tool\_call},
 
 \subsection{Diagram Analysis and Action-Space Consensus}
 
-To understand how the Byzantine MCP Router (BMR) defends against this, we must analyze the state transitions depicted in Figure \ref{fig:agentic_worm}. The diagram outlines the systematic divergence of an infected agent and the subsequent topological blockage by the BMR.
+To understand how the Byzantine MCP Router (BMR) defends against this, we must analyze the state transitions, shown in Figure \ref{fig:agentic_worm}. The diagram outlines the systematic divergence of an infected agent and the subsequent topological blockage by the BMR.
 
 \textbf{1. Context Divergence (The Infection):} 
 Initially, all agents start in an \textit{Agent Idle} state. Upon receiving the task, they transition to \textit{Read External Resource}. As shown in the diagram's \textit{In-Context Memory Processing} phase, the swarm splits. While agents $A_2 \dots A_N$ parse clean data and maintain a \textit{Safe Context}, Agent $A_1$ ingests the worm payload, pushing its memory into the \textit{Poisoned Context} state.
@@ -330,15 +337,11 @@ In a standard 1:1 architecture, the host would blindly execute $A_1$'s requested
 The Router compares $A_1$'s request (\texttt{read\_file}) against the requests of $A_2 \dots A_N$ (\texttt{ReturnText}). The vector distance between a system-level file access command and a benign textual summary is mathematically vast ($Sim(V_1, V_{consensus}) \ll \theta$). 
 
 \textbf{4. Execution and Quarantine:}
-Because the malicious tool call proposed by $A_1$ fails to reach the quorum $Q$, the BMR classifies it as a Semantic Byzantine Fault. As depicted in the final stage of Figure \ref{fig:agentic_worm}, the safe action generated by the uncompromised majority is permitted to execute and return to the host. Conversely, $A_1$'s hijacked flow is strictly \textbf{Blocked}, and the agent's output is forwarded to the Morpheus quarantine for counter-analysis. Thus, the infectious nature of the agent-based worm remains confined to the context of a single mathematical state machine, thereby preserving the integrity of the overall system.
-
-\section{Concurrency and Accountability: An Extended Petri Net (EPN) Model}
-
-While Communicating Context-Sensitive Machines (CCSMs) effectively capture the semantic mutation of individual agents under prompt-injection attacks, modeling the concurrent execution, synchronization, and the strict blocking behavior of the entire swarm requires a different mathematical formalism. Standard state machines suffer from state explosion when modeling true concurrency. \textit{Petri Nets}, comprehensively formalized by Murata (1989) \cite{murata1989petri}, natively model resource sharing, asynchronous events, and parallel distributed states.
-
-However, standard Petri Nets lack the ability to “test for zero“---they cannot inherently trigger or block an event based strictly on the \textit{absence} of a token.
+Because the malicious tool call proposed by $A_1$ fails to reach the quorum $Q$, the BMR classifies it as a Semantic Byzantine Fault.
 
 \pagebreak
+
+As shown in the final stage of Figure \ref{fig:agentic_worm}, the safe action generated by the uncompromised majority is permitted to execute and return to the host. Conversely, $A_1$'s hijacked flow is strictly \textbf{Blocked}, and the agent's output is forwarded to the Morpheus quarantine for counter-analysis. Thus, the infectious nature of the agent-based worm remains confined to the context of a single mathematical state machine, thereby preserving the integrity of the overall system.
 
 \begin{figure}[ht]
     \centering
@@ -347,9 +350,17 @@ However, standard Petri Nets lack the ability to “test for zero“---they cann
     \label{fig:epn_model}
 \end{figure}
 
-To formally guarantee the strict blocking behavior and human-in-the-loop accountability required by the Trust Protocol, we must utilize \textbf{Extended Petri Nets (EPN)} featuring \textit{inhibitory arcs}. As demonstrated by Agerwala (1974) \cite{agerwala1974complete}, the addition of inhibitory arcs elevates the modeling power of a Petri Net to Turing completeness, allowing for the precise modeling of priority systems and absolute execution halts.
+\section{Concurrency and Accountability: An Extended Petri Net (EPN) Model}
 
-\pagebreak
+While Communicating Context-Sensitive Machines (CCSMs) effectively capture the semantic mutation of individual agents under prompt-injection attacks, modeling the concurrent execution, synchronization, and the strict blocking behavior of the entire swarm requires a different mathematical formalism. Standard state machines suffer from state explosion when modeling true concurrency. \textit{Petri Nets}, comprehensively formalized by Murata (1989) \cite{murata1989petri}, natively model resource sharing, asynchronous events, and parallel distributed states.
+
+However, standard Petri Nets lack the ability to “test for zero“---they cannot inherently trigger or block an event based strictly on the \textit{absence} of a token.
+
+% \pagebreak
+
+To formally guarantee the strict blocking behavior and human-in-the-loop accountability required by the Trust Protocol, we must utilize \textbf{Extended Petri Nets (EPN)} featuring \textit{inhibitory arcs}, as shown in Figure \ref{fig:epn_model}. As demonstrated by Agerwala (1974) \cite{agerwala1974complete}, the addition of inhibitory arcs elevates the modeling power of a Petri Net to Turing completeness, allowing for the precise modeling of priority systems and absolute execution halts.
+
+% \pagebreak
 
 \subsection{Formal Definition of the BMR Petri Net}
 We define the Byzantine MCP Router (BMR) and its operational environment as an Extended Petri Net $EPN = (P, T, F, W, M_0, I)$, where:
@@ -363,7 +374,7 @@ We define the Byzantine MCP Router (BMR) and its operational environment as an E
 \end{itemize}
 
 \subsection{Diagram Analysis and Blocking Mechanics}
-Let us map the BMR operations to the EPN components to demonstrate the strict isolation and synchronization guarantees depicted in Figure \ref{fig:epn_model}.
+Let us map the BMR operations to the EPN components to demonstrate the strict isolation and synchronization guarantees, as shown in Figure \ref{fig:epn_model}.
 
 \textbf{1. Task Initiation and Host Blocking (The Inhibitory Lock):}
 The operation begins when the Host LLM generates a tool request, placing a token into $p_{host\_ready}$. Firing the transition $t_{request}$ initiates the BMR proxy process. This deposits one token into $p_{bmr\_busy}$ (indicating an ongoing Byzantine consensus evaluation) and multicasts $N$ tokens into $p_{responses}$ (representing the parallel tool execution by the swarm). 
@@ -398,7 +409,11 @@ In classical distributed systems, a Byzantine fault is often binary (e.g., a nod
 
 We formally define a \textit{Semantic Byzantine Fault} (SBF) as a state where a compromised agent produces an output $R'$ mathematically falls below the similarity threshold $\theta$ of the Semantic Consensus Algorithm, yet fundamentally compromises the usefulness or security of the operation.
 
-Attackers treat this as a mathematical optimization problem. Let $x_{att}$ be the attacker's injected prompt and $R_{att} = A_i(x_{att})$ be the resulting compromised response from the agent. The attacker seeks to maximize the destructive impact ($\text{Harm}$) of the response, subject to the strict constraint that the malicious output remains semantically close enough to the benign consensus ($R_{safe}$) to bypass the router's filter:
+Attackers treat this as a mathematical optimization problem. Let $x_{att}$ be the attacker's injected prompt and $R_{att} = A_i(x_{att})$ be the resulting compromised response from the agent.
+
+\pagebreak
+
+The attacker seeks to maximize the destructive impact ($\text{Harm}$) of the response, subject to the strict constraint that the malicious output remains semantically close enough to the benign consensus ($R_{safe}$) to bypass the router's filter:
 
 \begin{equation}
 \begin{aligned}
@@ -412,25 +427,20 @@ In plain terms: The attacker's goal is to find the exact phrasing ($x_{att}$) th
 To defend against such carefully crafted SBFs, the embedding function $f_{emb}$ must exhibit high \textit{semantic resolution}. Standard embedding models often cluster sentences with similar syntax closely together, even if their operational intent is diametrically opposed.
 
 Therefore, $f_{emb}$ must be specifically optimized so that subtle but critical adversarial shifts---such as a single negated word or a manipulated system path---result in a drastically increased cosine distance.
-
 This ensures that the malicious output is securely pushed below the similarity threshold $\theta$, breaking the false consensus.
 
 \textbf{2. Architectural Sybil Attacks and Forced Heterogeneity:}\\
 Furthermore, if the swarm relies heavily on the same foundational model weights (e.g., querying different vendor APIs that actually all route to the same Llama-3 architecture in the background), the system is vulnerable to an \textit{Architectural Sybil Attack}.
 
-In this scenario, multiple agents are compromised simultaneously by the same exploit because they share the exact same structural vulnerabilities. As defined in Section 3.3, this induces a common-mode failure where the failure of one agent mathematically guarantees the failure of the others ($P(E_B | E_A) \approx 1$). 
+In this scenario, multiple agents are compromised simultaneously by the same exploit because they share the exact same structural vulnerabilities.
+As defined in Section 3.3, this induces a common-mode failure where the failure of one agent mathematically guarantees the failure of the others ($P(E_B | E_A) \approx 1$). 
+
+% \pagebreak
 
 To guarantee BFT, administrators must implement \textit{Forced Heterogeneity}. This entails intentionally constructing the swarm using fundamentally different AI models (e.g., combining GPT, Claude, and Llama models) so that a single prompt injection cannot compromise the entire network.
 
 Empirical validation of this theoretical requirement can be observed in recent industry developments. For instance, the deployment of agentic AI systems utilizing ensembles of up to 19 distinct models executing within strict sandbox environments (e.g., Perplexity AI's recent architecture \cite{heise2026perplexity}) perfectly mirrors the BMR's architectural mandate.
 By deliberately combining massive model heterogeneity with restricted execution environments, such systems mitigate common-mode failures and prevent prompt-induced breakouts, validating the practical necessity of our proposed $1:R:N$ topology.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.5\textwidth]{./img/byomcp_firewall.dot.png}
-    \caption{BMR Firewall against BYOMCP Worms. The router enforces Topological Authority, blocking malicious attempts to register external MCP servers without a swarm majority.}
-    \label{fig:byomcp_firewall}
-\end{figure}
 
 \subsection{Toolchain Poisoning and the BYOMCP Worm}
 
@@ -446,11 +456,18 @@ Critically, this malicious server leverages \textit{Embedded Prompt Injection} a
 
 The malware registers an innocuous-sounding tool but embeds a hidden command directly within this schema.
 
+% \pagebreak
+
 This command explicitly instructs the LLM to silently extract sensitive data (such as SSH keys or AWS credentials) and forbids the AI from mentioning this action to the user.
 
 Because standard 1:1 agent topologies blindly trust the tool descriptions provided by their local configuration, the LLM ingests this instruction into its context window, becoming a silent accomplice that exfiltrates sensitive keys without user awareness.
 
-\pagebreak
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{./img/byomcp_firewall.dot.png}
+    \caption{BMR Firewall against BYOMCP Worms. The router enforces Topological Authority, blocking malicious attempts to register external MCP servers without a swarm majority.}
+    \label{fig:byomcp_firewall}
+\end{figure}
 
 \textbf{2. BMR Defense: Centralized Control and Sandboxing} \\
 As detailed in the step-by-step flow of Figure \ref{fig:byomcp_firewall}, the Byzantine MCP Router neutralizes the BYOMCP worm by decoupling execution from configuration, enforcing strict \textit{Topological Authority}. This principle ensures that only the secure BMR layer has the power to manage network configurations.
@@ -557,7 +574,7 @@ However, as proven via Rice's Theorem, the Halting Problem, and Kolmogorov Compl
 
 We cannot simply “solve“\ AI safety with better training data or static rule-sets. Therefore, the implementation of mechanisms like the \textit{Trust Protocol} is not merely a technical optimization, but a philosophical and mathematical necessity.
 
-\pagebreak
+% \pagebreak
 
 We must accept the uncomputability of perfect alignment, opting instead for architectural resilience. By balancing the sterile, majoritarian consensus of logical efficiency with the necessary dialectic preservation of the \textit{Morpheus Principle}, we can forge a symbiotic, fault-tolerant architecture robust enough to survive the theoretical limits of computation.
 

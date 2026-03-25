@@ -2374,21 +2374,23 @@
     <bcf:citekey order="7" intorder="1">tomasev2026intelligent</bcf:citekey>
     <bcf:citekey order="8" intorder="1">tomasev2026intelligent</bcf:citekey>
     <bcf:citekey order="9" intorder="1">goldwasser2025holes</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">tomasev2026intelligent</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">lamport1982byzantine</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">douceur2002sybil</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">bommasani2021opportunities</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">brand1983communicating</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">murata1989petri</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">agerwala1974complete</bcf:citekey>
-    <bcf:citekey order="17" intorder="1">heise2026perplexity</bcf:citekey>
-    <bcf:citekey order="18" intorder="1">socket2026sandworm</bcf:citekey>
-    <bcf:citekey order="19" intorder="1">yegge2026gastown</bcf:citekey>
-    <bcf:citekey order="20" intorder="1">rice1953classes</bcf:citekey>
-    <bcf:citekey order="21" intorder="1">turing1936computable</bcf:citekey>
-    <bcf:citekey order="22" intorder="1">goldwasser2025holes</bcf:citekey>
-    <bcf:citekey order="23" intorder="1">wang2025bypassing</bcf:citekey>
-    <bcf:citekey order="24" intorder="1">yegge2026gastown</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">vscode2026mcp</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">nemoclaw2026</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">tomasev2026intelligent</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">lamport1982byzantine</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">douceur2002sybil</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">bommasani2021opportunities</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">brand1983communicating</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">murata1989petri</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">agerwala1974complete</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">heise2026perplexity</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">socket2026sandworm</bcf:citekey>
+    <bcf:citekey order="21" intorder="1">yegge2026gastown</bcf:citekey>
+    <bcf:citekey order="22" intorder="1">rice1953classes</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">turing1936computable</bcf:citekey>
+    <bcf:citekey order="24" intorder="1">goldwasser2025holes</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">wang2025bypassing</bcf:citekey>
+    <bcf:citekey order="26" intorder="1">yegge2026gastown</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">
