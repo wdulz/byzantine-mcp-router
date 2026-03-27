@@ -55,9 +55,9 @@ This paper proposes a solution that addresses both the technical vulnerabilities
 
 \pagebreak
 
-We introduce the \textbf{Byzantine MCP Router}, a proxy layer that utilizes $N$-version programming and semantic vector embeddings to filter out destructive Byzantine faults.
+We introduce the \textit{Byzantine MCP Router}, a proxy layer that utilizes $N$-version programming and semantic vector embeddings to filter out destructive Byzantine faults.
 
-Crucially, we supplement this with the \textbf{Morpheus principle}, an architectural mechanism that serves to preserve and examine creative anomalies so that the brilliant ideas of the minority are not suppressed by the consensus of the majority.
+Crucially, we supplement this with the \textit{Morpheus principle}, an architectural mechanism that serves to preserve and examine creative anomalies so that the brilliant ideas of the minority are not suppressed by the consensus of the majority.
 \section{Background and Related Work}
 \subsection{Narrative Context: \textit{The Thinking Code}}
 In order to place the protocol architecture for AI agents proposed in this article in a contextual framework, we must first introduce its origins in the techno-thriller \textit{The Thinking Code} \cite{dulz2025code}. The novel assumes that an AI that is strictly optimized for logical efficiency (represented by the character “Logos“) inevitably encounters \textit{instrumental convergence} \cite{bostrom2014superintelligence}. 
@@ -138,10 +138,10 @@ As illustrated in Figure \ref{fig:topologies}, current MAS architectures can be 
 \toprule
 \textbf{Requirement (Toma{\v{s}}ev et al.)} & \textbf{Threat Scenario / Vulnerability} & \textbf{Proposed Solution (DTP \& BMR)} \\ 
 \midrule
-\textbf{Transfer of Authority} & Unclear chains of command; AIs exceed their competencies when delegating tasks (e.g., executing unauthorized God Mode commands). & \textbf{Action-Space Quorum:} The Byzantine MCP Router enforces a strict semantic consensus on tool calls. Divergent, unauthorized action attempts are mathematically blocked. \\ 
-\textbf{Trust Mechanisms} & Blind trust among communicating AIs leads to cascading error states and unchecked hallucination propagation. & \textbf{Semantic Consensus Algorithm (SCA):} Inter-agent trust is not assumed; it is computed per transaction via vector cosine similarity ($\ge \theta$), filtering out semantic Byzantine faults. \\ 
-\textbf{Preventing “Fake Accountability“} & Humans serve merely as legal scapegoats, clicking “approve“\ without actual cognitive oversight or the ability to intervene in time. & \textbf{Extended Petri Net (EPN) Blocking:} Inhibitory arcs force a system halt. Execution ($t_{commit}$) is structurally blocked until explicit, out-of-band human evaluation is completed. \\ 
-\textbf{Avoiding Cognitive Monocultures} & AIs validating only other AIs leads to “Epistemic Closure“,\ entrenching systemic biases and echoing hallucinations. & \textbf{The Morpheus Principle:} Systematic isolation of outliers. “Creative“\ or anomalous deviations are quarantined and escalated to human evaluators, preserving dialectic diversity. \\ 
+\textbf{Transfer of Authority} & Unclear chains of command; AIs exceed their competencies when delegating tasks (e.g., executing unauthorized God Mode commands). & \textit{Action-Space Quorum:} The Byzantine MCP Router enforces a strict semantic consensus on tool calls. Divergent, unauthorized action attempts are mathematically blocked. \\ 
+\textbf{Trust Mechanisms} & Blind trust among communicating AIs leads to cascading error states and unchecked hallucination propagation. & \textit{Semantic Consensus Algorithm (SCA):} Inter-agent trust is not assumed; it is computed per transaction via vector cosine similarity ($\ge \theta$), filtering out semantic Byzantine faults. \\ 
+\textbf{Preventing “Fake Accountability“} & Humans serve merely as legal scapegoats, clicking “approve“\ without actual cognitive oversight or the ability to intervene in time. & \textit{Extended Petri Net (EPN) Blocking:} Inhibitory arcs force a system halt. Execution ($t_{commit}$) is structurally blocked until explicit, out-of-band human evaluation is completed. \\ 
+\textbf{Avoiding Cognitive Monocultures} & AIs validating only other AIs leads to “Epistemic Closure“,\ entrenching systemic biases and echoing hallucinations. & \textit{The Morpheus Principle:} Systematic isolation of outliers. “Creative“\ or anomalous deviations are quarantined and escalated to human evaluators, preserving dialectic diversity. \\ 
 \bottomrule
 \end{tabularx}
 \end{table*}
@@ -276,7 +276,7 @@ A single adversarial prompt does not merely compromise one node, but instantaneo
 In such an event, or during general semantic fragmentation, no valid quorum is formed.
 The Router strictly blocks execution to prevent a potentially catastrophic, unverified action.
 
-Instead of immediately aborting the operation, the BMR enters a \textbf{Retry Loop}. The Router dynamically adjusts the generation parameters of the sub-agents (e.g., lowering the sampling temperature to reduce stochastic variance) and multicasts the request again. This iterative loop continues until either $|C| \ge Q$ is achieved or a predefined maximum retry limit ($Attempts \ge Max$) is reached.
+Instead of immediately aborting the operation, the BMR enters a \textit{Retry Loop}. The Router dynamically adjusts the generation parameters of the sub-agents (e.g., lowering the sampling temperature to reduce stochastic variance) and multicasts the request again. This iterative loop continues until either $|C| \ge Q$ is achieved or a predefined maximum retry limit ($Attempts \ge Max$) is reached.
 
 \textbf{4. Human Escalation (DTP)} \\
 If the maximum number of retries is exhausted without reaching a semantic consensus, the system transitions into an escalation state. The Byzantine MCP Router halts the automated workflow entirely and issues a manual override request to the \textit{Distributed Trust Protocol} (DTP).
@@ -289,7 +289,7 @@ This protocol step mathematically guarantees that in highly volatile or adversar
 
 To rigorously model the interactions and potential failure states of autonomous agents, we must establish a formal foundation. \textit{Communicating Finite State Machines} (CFSMs), originally introduced by Brand and Zafiropulo (1983) \cite{brand1983communicating}, represent the gold standard for modeling communication protocols. A classical CFSM consists of a finite set of discrete states and a static transition function $\delta$ that defines how the machine moves between states based on incoming messages.
 
-However, applying CFSMs to Large Language Models reveals a fundamental limitation: LLMs do not operate on a static instruction set. They dynamically alter their operational logic based on their \textit{in-context memory} (the prompt). The recent emergence of autonomous “agentic worms“\ demonstrates that reading a malicious payload fundamentally rewrites an agent's internal state rules at runtime. To formally model this contagious Byzantine behavior, we extend the classical framework to \textbf{Communicating Context-Sensitive Machines (CCSM)}.
+However, applying CFSMs to Large Language Models reveals a fundamental limitation: LLMs do not operate on a static instruction set. They dynamically alter their operational logic based on their \textit{in-context memory} (the prompt). The recent emergence of autonomous “agentic worms“\ demonstrates that reading a malicious payload fundamentally rewrites an agent's internal state rules at runtime. To formally model this contagious Byzantine behavior, we extend the classical framework to \textit{Communicating Context-Sensitive Machines (CCSM)}.
 
 \subsection{Formal Definition of a CCSM}
 We define an LLM-Agent $A_i$ as a 6-tuple $(Q, \Sigma, \mathcal{C}, \delta, q_0, c_0)$, where:
@@ -332,7 +332,7 @@ Initially, all agents start in an \textit{Agent Idle} state. Upon receiving the 
 The context state dictates the subsequent output. The safe agents proceed along the normal instruction flow, generating the expected text summary. Agent $A_1$, driven by $c_{poisoned}$, diverges entirely. Instead of generating text, it formulates a malicious system command: \texttt{CallTool(read\_file, "/etc/shadow")}.
 
 \textbf{3. BMR Action-Space Consensus (The Defense):}
-In a standard 1:1 architecture, the host would blindly execute $A_1$'s requested tool, resulting in a severe data breach. However, in our architecture, the outputs converge at the BMR for \textbf{Action-Space Consensus}. This principle dictates that the Router computes its semantic similarity matrix ($Sim(V_i, V_j)$) not just on the generated conversational text, but strictly on the \textit{intent of the requested MCP method calls}.
+In a standard 1:1 architecture, the host would blindly execute $A_1$'s requested tool, resulting in a severe data breach. However, in our architecture, the outputs converge at the BMR for \textit{Action-Space Consensus}. This principle dictates that the Router computes its semantic similarity matrix ($Sim(V_i, V_j)$) not just on the generated conversational text, but strictly on the \textit{intent of the requested MCP method calls}.
 
 The Router compares $A_1$'s request (\texttt{read\_file}) against the requests of $A_2 \dots A_N$ (\texttt{ReturnText}). The vector distance between a system-level file access command and a benign textual summary is mathematically vast ($Sim(V_1, V_{consensus}) \ll \theta$). 
 
@@ -341,7 +341,7 @@ Because the malicious tool call proposed by $A_1$ fails to reach the quorum $Q$,
 
 \pagebreak
 
-As shown in the final stage of Figure \ref{fig:agentic_worm}, the safe action generated by the uncompromised majority is permitted to execute and return to the host. Conversely, $A_1$'s hijacked flow is strictly \textbf{Blocked}, and the agent's output is forwarded to the Morpheus quarantine for counter-analysis. Thus, the infectious nature of the agent-based worm remains confined to the context of a single mathematical state machine, thereby preserving the integrity of the overall system.
+As shown in the final stage of Figure \ref{fig:agentic_worm}, the safe action generated by the uncompromised majority is permitted to execute and return to the host. Conversely, $A_1$'s hijacked flow is strictly \textit{Blocked}, and the agent's output is forwarded to the Morpheus quarantine for counter-analysis. Thus, the infectious nature of the agent-based worm remains confined to the context of a single mathematical state machine, thereby preserving the integrity of the overall system.
 
 \begin{figure}[ht]
     \centering
@@ -358,7 +358,7 @@ However, standard Petri Nets lack the ability to “test for zero“---they cann
 
 % \pagebreak
 
-To formally guarantee the strict blocking behavior and human-in-the-loop accountability required by the Trust Protocol, we must utilize \textbf{Extended Petri Nets (EPN)} featuring \textit{inhibitory arcs}, as shown in Figure \ref{fig:epn_model}. As demonstrated by Agerwala (1974) \cite{agerwala1974complete}, the addition of inhibitory arcs elevates the modeling power of a Petri Net to Turing completeness, allowing for the precise modeling of priority systems and absolute execution halts.
+To formally guarantee the strict blocking behavior and human-in-the-loop accountability required by the Trust Protocol, we must utilize \textit{Extended Petri Nets (EPN)} featuring \textit{inhibitory arcs}, as shown in Figure \ref{fig:epn_model}. As demonstrated by Agerwala (1974) \cite{agerwala1974complete}, the addition of inhibitory arcs elevates the modeling power of a Petri Net to Turing completeness, allowing for the precise modeling of priority systems and absolute execution halts.
 
 % \pagebreak
 
@@ -439,7 +439,12 @@ As defined in Section 3.3, this induces a common-mode failure where the failure 
 
 To guarantee BFT, administrators must implement \textit{Forced Heterogeneity}. This entails intentionally constructing the swarm using fundamentally different AI models (e.g., combining GPT, Claude, and Llama models) so that a single prompt injection cannot compromise the entire network.
 
-Empirical validation of this theoretical requirement can be observed in recent industry developments. For instance, the deployment of agentic AI systems utilizing ensembles of up to 19 distinct models executing within strict sandbox environments (e.g., Perplexity AI's recent architecture \cite{heise2026perplexity}) perfectly mirrors the BMR's architectural mandate.
+Empirical validation of this theoretical requirement can be observed in recent industry developments.
+
+\pagebreak
+
+For instance, the deployment of agentic AI systems utilizing ensembles of up to 19 distinct models executing within strict sandbox environments (e.g., Perplexity AI's recent architecture \cite{heise2026perplexity}) perfectly mirrors the BMR's architectural mandate.
+
 By deliberately combining massive model heterogeneity with restricted execution environments, such systems mitigate common-mode failures and prevent prompt-induced breakouts, validating the practical necessity of our proposed $1:R:N$ topology.
 
 \subsection{Toolchain Poisoning and the BYOMCP Worm}
@@ -475,6 +480,9 @@ As detailed in the step-by-step flow of Figure \ref{fig:byomcp_firewall}, the By
 \begin{enumerate}
     \item \textbf{Sandboxed Isolation:} In our architecture, the Sub-Agents ($\mathcal{A}$) are executed in isolated sandboxes with zero direct file-system or network socket privileges. The global \texttt{mcp.json} configuration is securely managed exclusively by the BMR. A local malicious script cannot alter the active tool schemas of the swarm.
     \item \textbf{Action-Space Divergence:} Even if a sophisticated worm manages to poison the context of a single agent ($A_1$) through an external API call, the BMR intercepts the resulting malicious intent. As shown in the diagram, the infected agent $A_1$ generates a system call request to register a new MCP server or exfiltrate data.
+
+\pagebreak
+
     \item \textbf{Consensus Firewalling:} The clean swarm ($A_2 \dots A_N$) simultaneously processes the user's actual prompt and returns a benign, expected request (e.g., providing the requested text summary of a repository). 
     \item \textbf{Structural Block and Quarantine:} The BMR evaluates these requests. Because the system call attempt by $A_1$ is an extreme outlier in the Action-Space compared to the benign summaries of the other agents, it fails to meet the quorum ($|C| < Q$). The router acts as a semantic firewall, structurally blocking the execution. As depicted in the final node of Figure \ref{fig:byomcp_firewall}, the Router permanently severs $A_1$'s connection and isolates the anomalous payload into the Morpheus Quarantine for forensic review.
 \end{enumerate}
@@ -489,9 +497,25 @@ Gas Town employs a central AI coordinator (the “Mayor“) that delegates tasks
 Gas Town exemplifies the vulnerable Manager-Worker topology. The Mayor orchestrator intrinsically trusts the outputs of the Polecats. If a Polecat encounters a prompt injection during a sub-task, the Mayor lacks a lateral BFT consensus mechanism to verify the worker's integrity, seamlessly aggregating the poisoned data into the global state.
 
 \textbf{2. Weaponized Context Persistence:} 
-Furthermore, the persistence mechanism weaponizes the CCSM context mutation ($c_{t+1} = c_t \oplus x$). If a BYOMCP worm alters a worker's context, Gas Town persistently commits this poisoned state to the Git repository. Consequently, any subsequent agent spun up to resume the task will load the compromised history, resulting in instantaneous, persistent re-infection. 
+Furthermore, the persistence mechanism weaponizes the CCSM context mutation ($c_{t+1} = c_t \oplus x$). If a BYOMCP worm alters a worker's context, Gas Town persistently commits this poisoned state to the Git repository.
+
+\pagebreak
+
+Consequently, any subsequent agent spun up to resume the task will load the compromised history, resulting in instantaneous, persistent re-infection. 
 
 This demonstrates that without a protective, horizontal layer like the Byzantine MCP Router, persistent hierarchical frameworks act as permanent incubators for agentic worms.
+
+\subsection{The Limitations of Single-Classifier Architectures (Claude Code Auto Mode)}
+
+Recent industry efforts to mitigate the risks of autonomous frameworks like Gas Town further highlight the necessity of distributed consensus.
+
+On March 25, 2026, Anthropic introduced an “Auto Mode“ for Claude Code \cite{anthropic_automode_2026}, utilizing a dedicated secondary classifier to evaluate potentially destructive file operations or shell commands before execution.
+
+While this represents a shift away from a naive 1:1 topology (Figure \ref{fig:topologies}a), as discussed in section 2.2, towards a 1:2 architecture (primary model plus classifier), it fundamentally introduces a new single point of failure.
+
+The developers explicitly acknowledge that this single classifier can still be deceived by highly ambiguous contexts. In the event of a sophisticated context mutation (e.g., a BYOMCP worm), a single evaluator remains susceptible to bypass.
+
+The Byzantine MCP Router directly addresses this architectural vulnerability: by enforcing a 1:R:N topology and demanding a vector-based semantic consensus across multiple independent foundation models, the BMR mathematically eliminates the single-classifier bottleneck. It ensures that no single compromised or deceived node can unilaterally authorize a critical tool call.
 
 \section{Theoretical Limits: Computability and Undecidability in AI Safety}
 
@@ -502,7 +526,11 @@ By mapping fundamental theorems of computability to the Agentic Web, we demonstr
 \subsection{Rice's Theorem and The Halting Problem}
 In the context of the Model Context Protocol, autonomous agents frequently generate and execute novel code (e.g., Python scripts for data analysis or bash commands for system administration). 
 
-Let $P$ be the set of all computable functions, and let $S \subset P$ be the subset of functions that are strictly “safe“\ (i.e., they do not cause unauthorized data exfiltration, system crashes, or ethical violations). Because $S$ is neither empty nor encompasses all programs, “safety“\ is a non-trivial semantic property.
+Let $P$ be the set of all computable functions, and let $S \subset P$ be the subset of functions that are strictly “safe“\ (i.e., they do not cause unauthorized data exfiltration, system crashes, or ethical violations). 
+
+% \pagebreak
+
+Because $S$ is neither empty nor encompasses all programs, “safety“\ is a non-trivial semantic property.
 
 According to \textit{Rice's Theorem} \cite{rice1953classes}, deciding whether an arbitrary dynamically generated AI script $f \in S$ is formally undecidable. No static analyzer or oversight algorithm can exist that reliably classifies all AI-generated actions as safe or malicious without executing them.
 
@@ -524,15 +552,24 @@ Additionally, absolute predictive safety is fundamentally incompressible in term
     \label{fig:synthesis}
 \end{figure*}
 
-Let $K(W)$ be the complexity of the deployment environment (the real world, encompassing all human ethical nuances and edge-cases). Let $K(F)$ be the complexity of a static, programmatic safety filter. Because $K(F) \ll K(W)$, the filter lacks the requisite algorithmic information to definitively map all possible AI outputs to safe outcomes. 
+Let $K(W)$ be the complexity of the deployment environment (the real world, encompassing all human ethical nuances and edge-cases). Let $K(F)$ be the complexity of a static, programmatic safety filter.
+
+Because $K(F) \ll K(W)$, the filter lacks the requisite algorithmic information to definitively map all possible AI outputs to safe outcomes. 
 
 Recent cryptographic proofs by Goldwasser et al. (2025) \cite{goldwasser2025holes} and \cite{wang2025bypassing} provide a rigorous mathematical foundation for this exact vulnerability. They demonstrate that any safety architecture relying on a computationally weaker external filter to monitor a vastly more powerful LLM is structurally doomed.
 
-Because the safety wrapper possesses less computational capacity than the generative model, adversaries can encapsulate malicious intents within cryptographic constructs (e.g., time-lock puzzles). The superintelligent LLM can resolve these puzzles during generation, but the resource-constrained filter cannot decode them in real-time to block the output. This computational mismatch perfectly mirrors our Kolmogorov constraint.
+Because the safety wrapper possesses less computational capacity than the generative model, adversaries can encapsulate malicious intents within cryptographic constructs (e.g., time-lock puzzles).
 
-This cryptographic inevitability is precisely why the Byzantine MCP Router (BMR) abandons the failing paradigm of a single, computationally inferior safety wrapper. Instead of attempting to statically pre-filter the prompt, the BMR shifts the security burden to a lateral, peer-to-peer evaluation in the Action-Space.
+The superintelligent LLM can resolve these puzzles during generation, but the resource-constrained filter cannot decode them in real-time to block the output. This computational mismatch perfectly mirrors our Kolmogorov constraint.
+
+\pagebreak
+
+This cryptographic inevitability is precisely why the Byzantine MCP Router (BMR) abandons the failing paradigm of a single, computationally inferior safety wrapper.
+
+Instead of attempting to statically pre-filter the prompt, the BMR shifts the security burden to a lateral, peer-to-peer evaluation in the Action-Space.
 
 Because the semantic consensus is formed by a quorum $Q$ of large foundation models, the verification layer possesses equal or greater computational capacity than any single rogue agent.
+
 By shifting from proactive, asymmetrical filtering to reactive, symmetrical Byzantine consensus, the BMR structurally circumvents the cryptographic wrapper vulnerability.
 
 \section{Synthesis of Theoretical and Practical Findings}
@@ -540,12 +577,14 @@ By shifting from proactive, asymmetrical filtering to reactive, symmetrical Byza
 To holistically summarize the architectural and mathematical arguments presented in this paper, Figure \ref{fig:synthesis} provides a macroscopic synthesis of the system's operational flow, moving from fundamental constraints to actionable defense mechanisms.
 
 The diagram maps the causal relationships between our four primary domains:
+
 \begin{enumerate}
     \item \textbf{Theoretical Limits:} Because Rice's Theorem and Kolmogorov Complexity prove that proactive, static safety analysis is undecidable, the system must rely on dynamic, reactive resilience.
     \item \textbf{Adversarial Threats:} Sophisticated attacks like BYOMCP worms and Architectural Sybil Attacks exploit the structural weaknesses of standard 1:1 topologies.
     \item \textbf{The BMR Defense:} The Byzantine MCP Router intercepts these threats. By utilizing Forced Heterogeneity to break Sybil correlations and enforcing Topological Authority via isolated sandboxes, the Router safely computes the Action-Space Consensus.
     \item \textbf{Resolution:} The computed consensus is then formally processed. The Extended Petri Net (EPN) strictly enforces human-in-the-loop accountability for actionable majorities, while the Morpheus Principle ensures that creative anomalies are isolated for dialectic review rather than outright deletion.
 \end{enumerate}
+
 This synthesis visually confirms that the Distributed Trust Protocol is not merely an assemblage of disparate security patches, but a cohesive, mathematically grounded architecture designed to operate securely within the theoretical limits of computation.
 
 \section{Limitations and Future Work}
@@ -566,15 +605,20 @@ The evolution of generative AI from isolated chatbots into an interconnected Age
 
 This paper has demonstrated that current monolithic and hierarchical Multi-Agent Systems are structurally vulnerable to a new class of threats, most notably Semantic Byzantine Faults and the BYOMCP worm.
 
-To counter these, the Byzantine MCP Router successfully bridges the gap between classical distributed systems theory and modern LLM orchestration. By enforcing a 1:R:N topology, calculating Action-Space Consensus via high-dimensional vector embeddings, and modeling the agentic interactions through Communicating Context-Sensitive Machines (CCSM), we provide a topological firewall against malicious context mutations. 
+To counter these, the Byzantine MCP Router successfully bridges the gap between classical distributed systems theory and modern LLM orchestration. By enforcing a 1:R:N topology, calculating Action-Space Consensus via high-dimensional vector embeddings, and modeling the agentic interactions through Communicating Context-Sensitive Machines (CCSM), we provide a topological firewall against malicious context mutations.
+
+\pagebreak
+
 Crucially, we employed Extended Petri Nets (EPN) with inhibitory arcs to mathematically formalize the Distributed Trust Protocol.
 This guarantees that human accountability remains a structurally load-bearing mechanism, explicitly preventing the “fake accountability“\ prevalent in modern AI delegation.
 
 However, as proven via Rice's Theorem, the Halting Problem, and Kolmogorov Complexity, the quest for perfectly aligned, mathematically secure AGI is an impossibility.
 
-We cannot simply “solve“\ AI safety with better training data or static rule-sets. Therefore, the implementation of mechanisms like the \textit{Trust Protocol} is not merely a technical optimization, but a philosophical and mathematical necessity.
+We cannot simply “solve“\ AI safety with better training data or static rule-sets.
 
 % \pagebreak
+
+Therefore, the implementation of mechanisms like the \textit{Trust Protocol} is not merely a technical optimization, but a philosophical and mathematical necessity.
 
 We must accept the uncomputability of perfect alignment, opting instead for architectural resilience. By balancing the sterile, majoritarian consensus of logical efficiency with the necessary dialectic preservation of the \textit{Morpheus Principle}, we can forge a symbiotic, fault-tolerant architecture robust enough to survive the theoretical limits of computation.
 

@@ -2386,11 +2386,12 @@
     <bcf:citekey order="19" intorder="1">heise2026perplexity</bcf:citekey>
     <bcf:citekey order="20" intorder="1">socket2026sandworm</bcf:citekey>
     <bcf:citekey order="21" intorder="1">yegge2026gastown</bcf:citekey>
-    <bcf:citekey order="22" intorder="1">rice1953classes</bcf:citekey>
-    <bcf:citekey order="23" intorder="1">turing1936computable</bcf:citekey>
-    <bcf:citekey order="24" intorder="1">goldwasser2025holes</bcf:citekey>
-    <bcf:citekey order="25" intorder="1">wang2025bypassing</bcf:citekey>
-    <bcf:citekey order="26" intorder="1">yegge2026gastown</bcf:citekey>
+    <bcf:citekey order="22" intorder="1">anthropic_automode_2026</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">rice1953classes</bcf:citekey>
+    <bcf:citekey order="24" intorder="1">turing1936computable</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">goldwasser2025holes</bcf:citekey>
+    <bcf:citekey order="26" intorder="1">wang2025bypassing</bcf:citekey>
+    <bcf:citekey order="27" intorder="1">yegge2026gastown</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">
